@@ -31,11 +31,11 @@ public class HabitDTO implements Serializable {
 
   private String description;
 
-  @FutureOrPresent
+  @FutureOrPresent(message = "Start Date Should Be in Present or Future")
   @NotNull(message = "Start Date is Mandatory")
   private Timestamp startDate;
 
-  @Positive
+  @Positive(message = "Goal Should Be Positive")
   @NotNull(message = "Goal is Mandatory")
   private BigInteger goal;
 
