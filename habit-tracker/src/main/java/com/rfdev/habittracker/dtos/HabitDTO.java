@@ -4,6 +4,7 @@ import com.rfdev.habittracker.models.Habit;
 import com.rfdev.habittracker.models.User;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,9 +32,11 @@ public class HabitDTO implements Serializable {
   private String description;
 
   @FutureOrPresent
+  @NotNull(message = "Start Date is Mandatory")
   private Timestamp startDate;
 
   @Positive
+  @NotNull(message = "Goal is Mandatory")
   private BigInteger goal;
 
   public HabitDTO(Habit habit) {
