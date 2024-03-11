@@ -9,3 +9,9 @@ INSERT INTO tb_user (user_id, name, username, password, email) VALUES ('f4a0e8f9
 INSERT INTO tb_user_role (user_id, role_id) VALUES ('f0ec7877-02f6-4240-a76a-94b3ac38f374', 'd4e0132a-b966-4b94-8051-3496f6e8d4e5');
 INSERT INTO tb_user_role (user_id, role_id) VALUES ('f0ec7877-02f6-4240-a76a-94b3ac38f374', 'f0ec7877-02f6-4240-a76a-94b3ac38f374');
 INSERT INTO tb_user_role (user_id, role_id) VALUES ('c5c7b3b2-8507-4e4a-b1db-992a60bb5b5e', 'd4e0132a-b966-4b94-8051-3496f6e8d4e5');
+
+INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('2797887c-7422-4725-ae57-e24ae1cbe8b6', 'f0ec7877-02f6-4240-a76a-94b3ac38f374', 'Study English', 'test', '2020-07-14T10:00:00Z', 100);
+INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('f7a25889-467d-4562-a10f-eaebf0a0ce94', 'f0ec7877-02f6-4240-a76a-94b3ac38f374', 'Workout', 'test', '2020-07-14T10:00:00Z', 100);
+INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('281c37e0-e1c0-433f-bd77-2edc71a46c7b', 'f0ec7877-02f6-4240-a76a-94b3ac38f374', 'Read', 'test', '2020-07-14T10:00:00Z', 100);
+INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('1d815824-aa58-49f7-9af2-cff8690ee2bd', 'f4a0e8f9-235e-4be2-bce7-0457153f09a3', 'Read', 'test', '2020-07-14T10:00:00Z', 100);
+INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('b519e122-8a4e-4167-b10c-f0496493d5e8', 'f4a0e8f9-235e-4be2-bce7-0457153f09a3', 'Workout', 'test', '2020-07-14T10:00:00Z', 100);
