@@ -1,17 +1,15 @@
 package com.rfdev.habittracker.services;
 
-import com.rfdev.habittracker.dtos.RoleDTO;
-import com.rfdev.habittracker.dtos.UserDTO;
-import com.rfdev.habittracker.dtos.UserInsertDTO;
-import com.rfdev.habittracker.dtos.UserUpdateDTO;
+import com.rfdev.habittracker.dtos.*;
+import com.rfdev.habittracker.models.Habit;
 import com.rfdev.habittracker.models.Role;
 import com.rfdev.habittracker.models.User;
+import com.rfdev.habittracker.repositories.HabitRepository;
 import com.rfdev.habittracker.repositories.RoleRepository;
 import com.rfdev.habittracker.repositories.UserRepository;
 import com.rfdev.habittracker.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +31,9 @@ public class UserService {
 
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
+
+  @Autowired
+  private HabitRepository habitRepository;
 
   @Transactional
   public Page<UserDTO> findAllPaged(Pageable pageable) {
@@ -76,6 +77,25 @@ public class UserService {
     }
   }
 
+  @Transactional
+  public HabitDTO insertHabit(UUID userId, HabitDTO habitDTO) {
+    try {
+      User user = userRepository.getReferenceById(userId);
+      Habit habit = new Habit();
+      copyHabitDtoToEntity(user, habitDTO, habit);
+      habit = habitRepository.save(habit);
+      return new HabitDTO(habit, user);
+    } catch (EntityNotFoundException e) {
+      throw new ResourceNotFoundException("User not found " + userId);
+    }
+  }
+
+  @Transactional
+  public Page<HabitDTO> findAllHabitsByUserId(UUID userId, Pageable pageable) {
+    Page<Habit> list = habitRepository.findByUserUserId(userId, pageable);
+    return list.map(HabitDTO::new);
+  }
+
   private void copyDtoToEntity(UserDTO dto, User entity) {
     entity.setName(dto.getName());
     entity.setUsername(dto.getUsername());
@@ -86,5 +106,13 @@ public class UserService {
       Role role = roleRepository.getReferenceById(roleDTO.getRoleId());
       entity.getRoles().add(role);
     }
+  }
+
+  private void copyHabitDtoToEntity(User user, HabitDTO habitDTO, Habit habit) {
+    habit.setUser(user);
+    habit.setHabitName(habitDTO.getHabitName());
+    habit.setDescription(habitDTO.getDescription());
+    habit.setStartDate(habitDTO.getStartDate());
+    habit.setGoal(habitDTO.getGoal());
   }
 }

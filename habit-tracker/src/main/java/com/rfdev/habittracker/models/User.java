@@ -45,4 +45,7 @@ public class User implements Serializable {
     )
   )
   private Set<Role> roles = new HashSet<>();
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<Habit> habits = new HashSet<>();
 }

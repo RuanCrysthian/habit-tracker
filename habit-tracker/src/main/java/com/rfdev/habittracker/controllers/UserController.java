@@ -1,5 +1,6 @@
 package com.rfdev.habittracker.controllers;
 
+import com.rfdev.habittracker.dtos.HabitDTO;
 import com.rfdev.habittracker.dtos.UserDTO;
 import com.rfdev.habittracker.dtos.UserInsertDTO;
 import com.rfdev.habittracker.dtos.UserUpdateDTO;
@@ -52,5 +53,19 @@ public class UserController {
   public ResponseEntity<UserDTO> delete(@PathVariable UUID id) {
     service.delete(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @PostMapping(value = "/{userId}/habits")
+  public ResponseEntity<HabitDTO> insertHabit(@PathVariable UUID userId,
+                                              @Valid @RequestBody HabitDTO habitDTO) {
+    HabitDTO newDto = service.insertHabit(userId, habitDTO);
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}/habits")
+      .buildAndExpand(newDto.getHabitId()).toUri();
+    return ResponseEntity.created(uri).body(newDto);
+  }
+
+  @GetMapping(value = "/{userId}/habits")
+  public ResponseEntity<Page<HabitDTO>> findAllHabitsFromUserId(@PathVariable UUID userId, Pageable pageable) {
+    return ResponseEntity.ok().body(service.findAllHabitsByUserId(userId, pageable));
   }
 }
