@@ -65,8 +65,7 @@ public class UserController {
   }
 
   @GetMapping(value = "/{userId}/habits")
-  public ResponseEntity<Page<HabitDTO>> findAllHabitsFromUserId(@PathVariable UUID userId,
-                                                                Pageable pageable) {
+  public ResponseEntity<Page<HabitDTO>> findAllHabitsFromUserId(@PathVariable UUID userId, Pageable pageable) {
     return ResponseEntity.ok().body(service.findAllHabitsByUserId(userId, pageable));
   }
 }
