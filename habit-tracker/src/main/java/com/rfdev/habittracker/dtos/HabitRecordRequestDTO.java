@@ -1,5 +1,6 @@
 package com.rfdev.habittracker.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.rfdev.habittracker.models.HabitStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HabitRecordRequestDTO implements Serializable {
 
   private UUID habitRecordId;
