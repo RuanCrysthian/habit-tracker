@@ -15,3 +15,7 @@ INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goa
 INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('281c37e0-e1c0-433f-bd77-2edc71a46c7b', 'f0ec7877-02f6-4240-a76a-94b3ac38f374', 'Read', 'test', '2020-07-14T10:00:00Z', 100);
 INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('1d815824-aa58-49f7-9af2-cff8690ee2bd', 'f4a0e8f9-235e-4be2-bce7-0457153f09a3', 'Read', 'test', '2020-07-14T10:00:00Z', 100);
 INSERT INTO tb_habit(habit_id, user_id, habit_name, description, start_date, goal) VALUES ('b519e122-8a4e-4167-b10c-f0496493d5e8', 'f4a0e8f9-235e-4be2-bce7-0457153f09a3', 'Workout', 'test', '2020-07-14T10:00:00Z', 100);
+
+INSERT INTO tb_habit_record (habit_record_id, habit_id, record_date, habit_status) VALUES ('c4a7f23e-3c91-4d38-87a6-3a2f8f4b01d2', '2797887c-7422-4725-ae57-e24ae1cbe8b6', '2024-03-13 08:00:00', 'DONE');
+INSERT INTO tb_habit_record (habit_record_id, habit_id, record_date, habit_status) VALUES  ('c4a7f23e-3c91-4d38-87a6-3a2f8f4b01d3', '2797887c-7422-4725-ae57-e24ae1cbe8b6', '2024-03-12 08:00:00', 'NOT_DONE');
+INSERT INTO tb_habit_record (habit_record_id, habit_id, record_date, habit_status) VALUES  ('c4a7f23e-3c91-4d38-87a6-3a2f8f4b01d4', '1d815824-aa58-49f7-9af2-cff8690ee2bd', '2024-03-11 08:00:00', 'DONE');

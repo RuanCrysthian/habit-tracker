@@ -1,0 +1,25 @@
+package com.rfdev.habittracker.dtos;
+
+import com.rfdev.habittracker.models.HabitStatus;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.UUID;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class HabitRecordRequestDTO implements Serializable {
+
+  private UUID habitRecordId;
+
+  private HabitDTO habitDTO;
+
+  @NotNull(message = "Status is Mandatory")
+  private HabitStatus status;
+}

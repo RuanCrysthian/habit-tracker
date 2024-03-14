@@ -9,6 +9,8 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -39,4 +41,7 @@ public class Habit implements Serializable {
 
   @Column(name = "goal")
   private BigInteger goal;
+
+  @OneToMany(mappedBy = "habit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<HabitRecord> habitRecords = new HashSet<>();
 }
