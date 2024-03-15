@@ -3,6 +3,7 @@ package com.rfdev.habittracker.services;
 import com.rfdev.habittracker.dtos.HabitDTO;
 import com.rfdev.habittracker.dtos.HabitRecordRequestDTO;
 import com.rfdev.habittracker.dtos.HabitRecordResponseDTO;
+import com.rfdev.habittracker.dtos.HabitStatisticsDTO;
 import com.rfdev.habittracker.models.Habit;
 import com.rfdev.habittracker.models.HabitRecord;
 import com.rfdev.habittracker.models.User;
@@ -32,6 +33,9 @@ public class HabitService {
 
   @Autowired
   private HabitRecordRepository habitRecordRepository;
+
+  @Autowired
+  private HabitStatistics habitStatistics;
 
   @Transactional
   public Page<HabitDTO> findAllPaged(Pageable pageable) {
@@ -81,6 +85,15 @@ public class HabitService {
   public Page<HabitRecordResponseDTO> findAllHabitRecordsFromHabitId(UUID habitId, Pageable pageable) {
     Page<HabitRecord> habitRecords = habitRecordRepository.findByHabitHabitId(habitId, pageable);
     return habitRecords.map(HabitRecordResponseDTO::new);
+  }
+
+  public HabitStatisticsDTO habitStatistics(UUID habitId) {
+    try {
+      Habit habit = habitRepository.getReferenceById(habitId);
+      return habitStatistics.getHabitStatistics(habit);
+    } catch (EntityNotFoundException e) {
+      throw new ResourceNotFoundException("Habit not found");
+    }
   }
 
   private void copyDtoToEntity(HabitDTO dto, Habit entity) {

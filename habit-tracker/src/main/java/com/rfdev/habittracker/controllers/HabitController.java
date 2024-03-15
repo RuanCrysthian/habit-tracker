@@ -3,6 +3,7 @@ package com.rfdev.habittracker.controllers;
 import com.rfdev.habittracker.dtos.HabitDTO;
 import com.rfdev.habittracker.dtos.HabitRecordRequestDTO;
 import com.rfdev.habittracker.dtos.HabitRecordResponseDTO;
+import com.rfdev.habittracker.dtos.HabitStatisticsDTO;
 import com.rfdev.habittracker.services.HabitService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,10 @@ public class HabitController {
   public ResponseEntity<Page<HabitRecordResponseDTO>> findAllHabitRecordsFromHabitId(@PathVariable UUID habitId,
                                                                                      Pageable pageable) {
     return ResponseEntity.ok().body(habitService.findAllHabitRecordsFromHabitId(habitId, pageable));
+  }
+
+  @GetMapping(value = "/{habitId}/statistics")
+  public ResponseEntity<HabitStatisticsDTO> habitStatistics(@PathVariable UUID habitId) {
+    return ResponseEntity.ok().body(habitService.habitStatistics(habitId));
   }
 }
