@@ -34,6 +34,7 @@ https://github.com/RuanCrysthian/habit-tracker.git
 ```
 2. Execute o Docker Compose para construir e iniciar os contêineres.
 ```
+cd habit-tracker/
 docker-compose up --build -d
 ```
 3. Importe a coleção para seu Postman.
