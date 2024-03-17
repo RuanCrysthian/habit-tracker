@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "b5130346-121f-4a83-b60a-765699e44946",
+		"name": "Habit-Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26552155"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users/197ba9e5-6fcf-420a-a39c-050a7004f3ec",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"197ba9e5-6fcf-420a-a39c-050a7004f3ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ruan\",\n    \"username\": \"ruan.ferraz\",\n    \"email\": \"ruan@dev.com\",\n    \"password\": \"QAZ123qaz\",\n    \"roles\": [\n        {\n            \"roleId\":\"d4e0132a-b966-4b94-8051-3496f6e8d4e5\"\n        },\n        {\n            \"roleId\": \"f0ec7877-02f6-4240-a76a-94b3ac38f374\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ruan C Ferraz\",\n    \"username\": \"ruan.ferraz\",\n    \"email\": \"emma.davis@example.com\",\n    \"password\": \"QAZ123qaz\",\n    \"roles\": [\n        {\n            \"roleId\":\"d4e0132a-b966-4b94-8051-3496f6e8d4e5\"\n        },\n        {\n            \"roleId\": \"f0ec7877-02f6-4240-a76a-94b3ac38f374\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/bdc38d4e-f117-45fc-9991-a38160d07a51",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"bdc38d4e-f117-45fc-9991-a38160d07a51"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ruan\",\n    \"username\": \"ruan.ferraz\",\n    \"email\": \"ruan@dev.com\",\n    \"password\": \"QAZ123qaz\",\n    \"roles\": [\n        {\n            \"roleId\":\"d4e0132a-b966-4b94-8051-3496f6e8d4e5\"\n        },\n        {\n            \"roleId\": \"f0ec7877-02f6-4240-a76a-94b3ac38f374\"\n        }\n\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/f0ec7877-02f6-4240-a76a-94b3ac38f374",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"f0ec7877-02f6-4240-a76a-94b3ac38f374"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Habits",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habitName\": \"Study DSA\",\n    \"description\": \"Array, LinkedList\",\n    \"startDate\": \"2024-03-15T10:00:00.000+00:00\",\n    \"goal\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/f0ec7877-02f6-4240-a76a-94b3ac38f374/habits",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"f0ec7877-02f6-4240-a76a-94b3ac38f374",
+								"habits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Habits from User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habitName\": \"Study DSA\",\n    \"description\": \"Array, LinkedList\",\n    \"startDate\": \"2024-03-11T10:00:00.000+00:00\",\n    \"goal\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/f0ec7877-02f6-4240-a76a-94b3ac38f374/habits",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"f0ec7877-02f6-4240-a76a-94b3ac38f374",
+								"habits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Habits",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habits",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habits/2797887c-7422-4725-ae57-e24ae1cbe8b6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits",
+								"2797887c-7422-4725-ae57-e24ae1cbe8b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habitId\": \"aaef5a81-a18f-47d2-ae73-6f6eac981926\",\n    \"user\": {\n        \"userId\": \"a3b6e8e5-7c2a-48fb-8f68-1f0c4d3e6bfe\"\n    },\n    \"habitName\": \"Study DSA\",\n    \"description\": \"Array, LinkedList\",\n    \"startDate\": \"2024-03-15T10:00:00.000+00:00\",\n    \"goal\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/habits/281c37e0-e1c0-433f-bd77-2edc71a46c7b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits",
+								"281c37e0-e1c0-433f-bd77-2edc71a46c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habits/281c37e0-e1c0-433f-bd77-2edc71a46c7b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits",
+								"281c37e0-e1c0-433f-bd77-2edc71a46c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Habit Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"DONE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/habits/2797887c-7422-4725-ae57-e24ae1cbe8b6/habit-records",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits",
+								"2797887c-7422-4725-ae57-e24ae1cbe8b6",
+								"habit-records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Habit Records From Habits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habits/2797887c-7422-4725-ae57-e24ae1cbe8b6/habit-records",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits",
+								"2797887c-7422-4725-ae57-e24ae1cbe8b6",
+								"habit-records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Statistic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habits/2797887c-7422-4725-ae57-e24ae1cbe8b6/statistics",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habits",
+								"2797887c-7422-4725-ae57-e24ae1cbe8b6",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Habit Record",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habit-records",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habit-records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/habit-records/be664868-4cc9-4c96-8cd8-1b7b16f4e545",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habit-records",
+								"be664868-4cc9-4c96-8cd8-1b7b16f4e545"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habitDTO\": {\n        \"habitId\": \"2797887c-7422-4725-ae57-e24ae1cbe8b6\"\n    },\n    \"status\": \"NOT_DONE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/habit-records/be664868-4cc9-4c96-8cd8-1b7b16f4e545",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habit-records",
+								"be664868-4cc9-4c96-8cd8-1b7b16f4e545"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habitDTO\": {\n        \"habitId\": \"f7a25889-467d-4562-a10f-eaebf0a0ce94\"\n    },\n    \"status\": \"DONE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/habit-records/e7b23742-afdd-424b-9e17-c5a0fca2ea51",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"habit-records",
+								"e7b23742-afdd-424b-9e17-c5a0fca2ea51"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
