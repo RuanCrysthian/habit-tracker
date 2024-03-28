@@ -12,7 +12,6 @@ import com.rfdev.habittracker.repositories.HabitRepository;
 import com.rfdev.habittracker.repositories.UserRepository;
 import com.rfdev.habittracker.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,17 +24,25 @@ import java.util.UUID;
 @Service
 public class HabitService {
 
-  @Autowired
-  private HabitRepository habitRepository;
+  private final HabitRepository habitRepository;
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  @Autowired
-  private HabitRecordRepository habitRecordRepository;
+  private final HabitRecordRepository habitRecordRepository;
 
-  @Autowired
-  private HabitStatistics habitStatistics;
+  private final HabitStatistics habitStatistics;
+
+  private static final String HABIT_NOT_FOUND = "Habit not Found";
+
+  public HabitService(HabitRepository habitRepository,
+                      UserRepository userRepository,
+                      HabitRecordRepository habitRecordRepository,
+                      HabitStatistics habitStatistics) {
+    this.habitRepository = habitRepository;
+    this.userRepository = userRepository;
+    this.habitRecordRepository = habitRecordRepository;
+    this.habitStatistics = habitStatistics;
+  }
 
   @Transactional
   public Page<HabitDTO> findAllPaged(Pageable pageable) {
@@ -46,7 +53,7 @@ public class HabitService {
   @Transactional
   public HabitDTO findById(UUID habitId) {
     Optional<Habit> obj = habitRepository.findById(habitId);
-    Habit habit = obj.orElseThrow(() -> new ResourceNotFoundException("Habit not Found"));
+    Habit habit = obj.orElseThrow(() -> new ResourceNotFoundException(HABIT_NOT_FOUND));
     return new HabitDTO(habit, habit.getUser());
   }
 
@@ -58,13 +65,13 @@ public class HabitService {
       habit = habitRepository.save(habit);
       return new HabitDTO(habit);
     } catch (EntityNotFoundException e) {
-      throw new ResourceNotFoundException("Habit not Found " + habitId);
+      throw new ResourceNotFoundException(HABIT_NOT_FOUND);
     }
   }
 
   public void deleteHabit(UUID habitId) {
     Optional<Habit> obj = habitRepository.findById(habitId);
-    Habit habit = obj.orElseThrow(() -> new ResourceNotFoundException("Habit not Found"));
+    Habit habit = obj.orElseThrow(() -> new ResourceNotFoundException(HABIT_NOT_FOUND));
     habitRepository.delete(habit);
   }
 
@@ -77,7 +84,7 @@ public class HabitService {
       habitRecord = habitRecordRepository.save(habitRecord);
       return new HabitRecordResponseDTO(habitRecord, habit);
     } catch (EntityNotFoundException e) {
-      throw new ResourceNotFoundException("Habit not found " + habitId);
+      throw new ResourceNotFoundException(HABIT_NOT_FOUND);
     }
   }
 
@@ -92,7 +99,7 @@ public class HabitService {
       Habit habit = habitRepository.getReferenceById(habitId);
       return habitStatistics.getHabitStatistics(habit);
     } catch (EntityNotFoundException e) {
-      throw new ResourceNotFoundException("Habit not found");
+      throw new ResourceNotFoundException(HABIT_NOT_FOUND);
     }
   }
 

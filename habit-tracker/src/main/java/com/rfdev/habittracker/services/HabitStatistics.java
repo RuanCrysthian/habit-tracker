@@ -4,7 +4,6 @@ import com.rfdev.habittracker.dtos.HabitStatisticsDTO;
 import com.rfdev.habittracker.models.Habit;
 import com.rfdev.habittracker.models.HabitStatus;
 import com.rfdev.habittracker.repositories.HabitRecordRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,8 +12,11 @@ import java.math.BigInteger;
 @Service
 public class HabitStatistics {
 
-  @Autowired
-  private HabitRecordRepository habitRecordRepository;
+  private final HabitRecordRepository habitRecordRepository;
+
+  public HabitStatistics(HabitRecordRepository habitRecordRepository) {
+    this.habitRecordRepository = habitRecordRepository;
+  }
 
   public HabitStatisticsDTO getHabitStatistics(Habit habit) {
     BigInteger habitGoal = habit.getGoal();

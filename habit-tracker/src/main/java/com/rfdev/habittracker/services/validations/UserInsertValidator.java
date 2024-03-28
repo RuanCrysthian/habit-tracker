@@ -6,15 +6,17 @@ import com.rfdev.habittracker.models.User;
 import com.rfdev.habittracker.repositories.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {
 
-  @Autowired
-  private UserRepository repository;
+  private final UserRepository repository;
+
+  public UserInsertValidator(UserRepository repository) {
+    this.repository = repository;
+  }
 
   @Override
   public void initialize(UserInsertValid ann) {
