@@ -4,7 +4,6 @@ import com.rfdev.habittracker.dtos.HabitRecordRequestDTO;
 import com.rfdev.habittracker.dtos.HabitRecordResponseDTO;
 import com.rfdev.habittracker.services.HabitRecordService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +15,11 @@ import java.util.UUID;
 @RequestMapping(value = "api/habit-records")
 public class HabitRecordController {
 
-  @Autowired
-  private HabitRecordService habitRecordService;
+  private final HabitRecordService habitRecordService;
+
+  public HabitRecordController(HabitRecordService habitRecordService) {
+    this.habitRecordService = habitRecordService;
+  }
 
   @GetMapping
   public ResponseEntity<Page<HabitRecordResponseDTO>> findAll(Pageable pageable) {

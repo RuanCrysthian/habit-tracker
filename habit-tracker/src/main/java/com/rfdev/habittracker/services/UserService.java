@@ -9,7 +9,6 @@ import com.rfdev.habittracker.repositories.RoleRepository;
 import com.rfdev.habittracker.repositories.UserRepository;
 import com.rfdev.habittracker.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,17 +22,25 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  @Autowired
-  private RoleRepository roleRepository;
+  private final RoleRepository roleRepository;
 
-  @Autowired
-  private BCryptPasswordEncoder passwordEncoder;
+  private final BCryptPasswordEncoder passwordEncoder;
 
-  @Autowired
-  private HabitRepository habitRepository;
+  private final HabitRepository habitRepository;
+
+  private static final String USER_NOT_FOUND = "User not Found";
+
+  public UserService(UserRepository userRepository,
+                     RoleRepository roleRepository,
+                     BCryptPasswordEncoder passwordEncoder,
+                     HabitRepository habitRepository) {
+    this.userRepository = userRepository;
+    this.roleRepository = roleRepository;
+    this.passwordEncoder = passwordEncoder;
+    this.habitRepository = habitRepository;
+  }
 
   @Transactional
   public Page<UserDTO> findAllPaged(Pageable pageable) {
@@ -44,7 +51,7 @@ public class UserService {
   @Transactional(readOnly = true)
   public UserDTO findById(UUID userId) {
     Optional<User> obj = userRepository.findById(userId);
-    User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
+    User entity = obj.orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND));
     return new UserDTO(entity);
   }
 
@@ -65,7 +72,7 @@ public class UserService {
       entity = userRepository.save(entity);
       return new UserDTO(entity);
     } catch (EntityNotFoundException e) {
-      throw new ResourceNotFoundException("Id not found " + userId);
+      throw new ResourceNotFoundException(USER_NOT_FOUND);
     }
   }
 
@@ -73,7 +80,7 @@ public class UserService {
     try {
       userRepository.deleteById(userId);
     } catch (EmptyResultDataAccessException e) {
-      throw new ResourceNotFoundException("Id not found " + userId);
+      throw new ResourceNotFoundException(USER_NOT_FOUND);
     }
   }
 
@@ -86,7 +93,7 @@ public class UserService {
       habit = habitRepository.save(habit);
       return new HabitDTO(habit, user);
     } catch (EntityNotFoundException e) {
-      throw new ResourceNotFoundException("User not found " + userId);
+      throw new ResourceNotFoundException(USER_NOT_FOUND);
     }
   }
 
