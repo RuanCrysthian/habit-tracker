@@ -1,5 +1,6 @@
 package com.rfdev.habittracker.dtos;
 
+import com.rfdev.habittracker.models.User;
 import com.rfdev.habittracker.services.validations.UserInsertValid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -16,4 +17,8 @@ public class UserInsertDTO extends UserDTO {
 
   @NotBlank(message = "Password is Mandatory")
   private String password;
+
+  public UserInsertDTO(User user) {
+    super(user);
+  }
 }

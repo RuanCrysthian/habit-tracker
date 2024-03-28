@@ -9,7 +9,6 @@ import com.rfdev.habittracker.repositories.RoleRepository;
 import com.rfdev.habittracker.repositories.UserRepository;
 import com.rfdev.habittracker.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -77,11 +76,9 @@ public class UserService {
   }
 
   public void delete(UUID userId) {
-    try {
-      userRepository.deleteById(userId);
-    } catch (EmptyResultDataAccessException e) {
-      throw new ResourceNotFoundException(USER_NOT_FOUND);
-    }
+    Optional<User> obj = userRepository.findById(userId);
+    User user = obj.orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND));
+    userRepository.delete(user);
   }
 
   @Transactional
